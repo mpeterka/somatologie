@@ -1,0 +1,7 @@
+* text=auto eol=lf
+*.glb binary
+*.wasm binary
+
+# Preserve upstream distributions without newline conversion.
+dist/vendor/** -text
+dist/models/** -text
