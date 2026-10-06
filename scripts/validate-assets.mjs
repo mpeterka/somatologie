@@ -33,3 +33,12 @@ assert.equal(directions.length, 21);
 assert.equal(directions.filter(item => item.region === 'Roviny').length, 3);
 assert.equal(new Set(directions.map(item => item.id)).size, 21);
 console.log('OK: 3 roviny a 18 směrů.');
+const human = readFileSync(new URL('models/human.glb', root));
+assert.equal(human.toString('ascii', 0, 4), 'glTF');
+assert.equal(human.readUInt32LE(8), human.length);
+const humanModel = JSON.parse(human.subarray(20, 20 + human.readUInt32LE(12)));
+assert.ok(humanModel.nodes.some(node => node.name === 'skin__FMA7163' && node.mesh !== undefined));
+for (const file of ['HUMAN-NOTICE.txt', 'HUMAN-LICENSE.txt', 'HUMAN-LICENSE-legalcode.html']) {
+  assert.ok(existsSync(new URL(`models/${file}`, root)));
+}
+console.log('OK: model celého člověka a licenční oznámení.');

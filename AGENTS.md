@@ -3,7 +3,7 @@
 ## Projekt
 
 Somatologie je statická česká aplikace pro poznávání kostí a svalů na 3D modelech
-a pro procvičování rovin a směrů na původních SVG schématech.
+a pro procvičování rovin a směrů s prostorovými značkami na modelu celého člověka.
 Používá JavaScript ES modules, Three.js a WebGL 2. Nemá backend ani bundler.
 Adresář `dist/` obsahuje udržovaný zdroj webu i distribuované soubory; není to
 odstranitelný build output. GitHub Pages publikuje tento adresář z větve `main`.
@@ -15,7 +15,10 @@ odstranitelný build output. GitHub Pages publikuje tento adresář z větve `ma
 - `dist/viewer.js`, `dist/model-utils.js`: vykreslení a identita kostí.
 - `scripts/create-bones.mjs`: zdroj anatomické sady; generuje `dist/bones.json`.
 - `scripts/create-extra-quizzes.mjs`: generuje základní svaly a roviny/směry.
-- `dist/diagrams.js`: anatomická schémata; strany vždy z pohledu těla.
+- `dist/orientation.js`: prostorové roviny a šipky; strany vždy z pohledu těla.
+  Osy modelu: +Y k hlavě, +Z dopředu, -X anatomická pravá strana.
+  Model povrchu má jeden mesh. Pravá/levá polovina se zvýrazňuje pomocí
+  ořezové roviny; její geometrie je sdílená a overlay ji nesmí uvolnit.
 - `scripts/validate-assets.mjs`: kontrola dat a jejich vazeb na GLB.
 - `scripts/prepare-vendor.mjs`: kopírování instalované verze Three.js a Draco.
 - `tests/`: testy přes vestavěný `node:test`.

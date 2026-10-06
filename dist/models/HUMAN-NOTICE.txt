@@ -1,0 +1,21 @@
+Full human surface used in the anatomical orientation quiz
+=========================================================
+
+Local file: human.glb (downloaded 2026-10-06)
+BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan
+BodyParts3D, copyright The Database Center for Life Science.
+Original dataset: BodyParts3D version 3.0, FMA7163 (skin).
+Original archive: https://doi.org/10.18908/lsdba.nbdc00837-000
+Dataset mirror: https://github.com/Kevin-Mattheus-Moerman/BodyParts3D
+GLB export: https://github.com/yamz8/human-body-simulator/blob/main/public/models/anatomy-skin.glb
+Export notices: https://github.com/yamz8/human-body-simulator/blob/main/public/THIRD_PARTY_NOTICES.md
+
+License: Creative Commons Attribution-ShareAlike 2.1 Japan.
+https://creativecommons.org/licenses/by-sa/2.1/jp/legalcode
+See HUMAN-LICENSE.txt and HUMAN-LICENSE-legalcode.html alongside this file.
+
+The exporting project reports Draco optimization, coordinate registration
+and semantic FMA grouping. This app preserves the downloaded GLB bytes;
+it changes scale, material and vertex normals at runtime and adds separate
+arrows, planes and a tissue cutaway. The model and adaptations remain under
+CC BY-SA 2.1 Japan. Unrelated application code is not relicensed.

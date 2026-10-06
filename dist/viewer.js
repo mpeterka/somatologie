@@ -3,14 +3,16 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { anatomicalId } from './model-utils.js';
+import { createOrientationOverlay } from './orientation.js';
 
-export async function createViewer(container, modelUrl, muscles = false) {
+export async function createViewer(container, modelUrl, kind = 'bones') {
   const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderer.setClearColor(0x132532, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.3;
+  renderer.localClippingEnabled = true;
   renderer.domElement.setAttribute('aria-label', '3D anatomický model. Otáčení tažením, přiblížení kolečkem nebo gestem dvou prstů.');
   renderer.domElement.addEventListener('webglcontextlost', event => {
     event.preventDefault();
@@ -32,7 +34,7 @@ export async function createViewer(container, modelUrl, muscles = false) {
   const rim = new THREE.DirectionalLight(0x9ccee8, 2);
   rim.position.set(-2, 1, -3);
   scene.add(rim);
-  const neutral = new THREE.MeshStandardMaterial({color: muscles ? 0xb67770 : 0xd8dcd6, roughness: 0.72, metalness: 0, side: THREE.DoubleSide});
+  const neutral = new THREE.MeshStandardMaterial({color: kind === 'muscles' ? 0xb67770 : kind === 'human' ? 0xcfb69d : 0xd8dcd6, roughness: 0.72, metalness: 0, side: THREE.DoubleSide});
   const selected = new THREE.MeshStandardMaterial({color: 0xffbc42, emissive: 0xc7790e, emissiveIntensity: 0.38, roughness: 0.56, side: THREE.DoubleSide, depthTest: false});
   const draco = new DRACOLoader();
   draco.setDecoderPath(new URL('./vendor/addons/libs/draco/gltf/', import.meta.url).href);
@@ -53,6 +55,11 @@ export async function createViewer(container, modelUrl, muscles = false) {
   const meshById = new Map();
   const allMeshes = [];
   gltf.scene.updateMatrixWorld(true);
+  if (kind === 'human') {
+    const size = new THREE.Box3().setFromObject(gltf.scene).getSize(new THREE.Vector3());
+    gltf.scene.scale.multiplyScalar(1.8 / size.y);
+    gltf.scene.updateMatrixWorld(true);
+  }
   gltf.scene.traverse(object => { if (object.isMesh) { object.userData.za_name = anatomicalId(object); allMeshes.push(object); } });
   const originalMaterials = new Set(allMeshes.flatMap(mesh => Array.isArray(mesh.material) ? mesh.material : [mesh.material]));
   for (const material of originalMaterials) {
@@ -64,7 +71,8 @@ export async function createViewer(container, modelUrl, muscles = false) {
   for (const mesh of allMeshes) {
     scene.attach(mesh);
     const id = mesh.userData.za_name;
-    mesh.visible = muscles ? !/fascia|tendon|bursa|sheath|aponeurosis|retinaculum/i.test(id || '') : !/cells of ethmoid|Sinus of|cartilage|process of nasal septal/i.test(id || '');
+    if (!mesh.geometry.attributes.normal) mesh.geometry.computeVertexNormals();
+    mesh.visible = kind === 'muscles' ? !/fascia|tendon|bursa|sheath|aponeurosis|retinaculum/i.test(id || '') : !/cells of ethmoid|Sinus of|cartilage|process of nasal septal/i.test(id || '');
     mesh.material = neutral;
     if (id) {
       if (!meshById.has(id)) meshById.set(id, []);
@@ -74,6 +82,9 @@ export async function createViewer(container, modelUrl, muscles = false) {
   const bodyBox = new THREE.Box3();
   for (const mesh of allMeshes.filter(m => m.visible)) bodyBox.expandByObject(mesh);
   let active = [];
+  let orientation;
+  const caption = document.createElement('p');
+  caption.className = 'orientation-caption'; caption.hidden = true; container.append(caption);
   let fullView = true;
   let observer;
   function render() { renderer.render(scene, camera); }
@@ -81,7 +92,7 @@ export async function createViewer(container, modelUrl, muscles = false) {
     const center = box.getCenter(new THREE.Vector3());
     const size = box.getSize(new THREE.Vector3());
     const distance = Math.max(size.y, size.x / Math.max(camera.aspect, 0.1), size.z, 0.08) / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2))) * 1.22;
-    const direction = front ? new THREE.Vector3(0, 0.04, 1).normalize() : camera.position.clone().sub(controls.target).normalize();
+    const direction = front?.isVector3 ? front.clone().normalize() : front ? new THREE.Vector3(0, 0.04, 1).normalize() : camera.position.clone().sub(controls.target).normalize();
     controls.target.copy(center);
     camera.position.copy(center).addScaledVector(direction, distance);
     controls.update(); render();
@@ -91,7 +102,7 @@ export async function createViewer(container, modelUrl, muscles = false) {
     renderer.setSize(Math.max(width, 1), Math.max(height, 1), false);
     camera.aspect = width / Math.max(height, 1);
     camera.updateProjectionMatrix();
-    if (fullView) fit(bodyBox);
+    if (fullView) resetView();
     render();
   }
   observer = new ResizeObserver(resize);
@@ -104,16 +115,38 @@ export async function createViewer(container, modelUrl, muscles = false) {
     if (!ids.length || ids.some(id => !meshById.has(id))) throw new Error('Otázka nemá odpovídající 3D model.');
     return ids.flatMap(id => meshById.get(id));
   }
+  function clearOrientation() {
+    orientation?.dispose(); orientation = null; caption.hidden = true;
+  }
+  function setSelection(ids) {
+    const next = ids.length ? lookup(ids) : [];
+    for (const mesh of active) { mesh.material = neutral; mesh.renderOrder = 0; }
+    active = next;
+    for (const mesh of active) { mesh.visible = true; mesh.material = selected; mesh.renderOrder = 10; }
+  }
+  function resetView() {
+    fullView = true;
+    fit(orientation ? orientation.focusBox || orientation.frameBox : bodyBox, orientation?.view || true);
+  }
   return {
     validate(bones) { for (const bone of bones) lookup(bone.meshIds); },
     highlight(ids) {
-      const next = ids.length ? lookup(ids) : [];
-      for (const mesh of active) { mesh.material = neutral; mesh.renderOrder = 0; }
-      active = next;
-      for (const mesh of active) { mesh.visible = true; mesh.material = selected; mesh.renderOrder = 10; }
+      clearOrientation(); setSelection(ids);
       render();
     },
-    resetView() { fullView = true; fit(bodyBox); },
+    show(item) {
+      clearOrientation();
+      orientation = createOrientationOverlay(item, bodyBox, kind === 'human' ? allMeshes : []);
+      scene.add(orientation.group); setSelection([]);
+      caption.textContent = orientation.caption; caption.hidden = false;
+      resetView();
+    },
+    resetView,
+    focusOrientation() {
+      if (!orientation) return;
+      const box = orientation.focusBox || new THREE.Box3().setFromObject(orientation.group);
+      fullView = false; fit(box, false);
+    },
     focus(ids) {
       const box = new THREE.Box3();
       for (const mesh of lookup(ids)) box.expandByObject(mesh);
@@ -133,6 +166,7 @@ export async function createViewer(container, modelUrl, muscles = false) {
       render();
     },
     dispose() {
+      clearOrientation(); caption.remove();
       observer.disconnect(); controls.dispose(); renderer.setAnimationLoop(null);
       for (const geometry of new Set(allMeshes.map(m => m.geometry))) geometry.dispose();
       neutral.dispose(); selected.dispose(); renderer.dispose(); renderer.domElement.remove();

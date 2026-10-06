@@ -8,7 +8,7 @@ Statická aplikace se třemi kvízy, které vybíráš na úvodní obrazovce:
 
 - **Kosti:** WebGL kostra, 100 zvýraznitelných kostí a 33 základních názvů bez stran a čísel (Obratel / Vertebra, Žebro / Costa).
 - **Svaly:** WebGL svalový model a 15 základních svalů. Hlavy, části a obě strany jednoho svalu se zvýrazňují společně.
-- **Roviny a směry:** 3 roviny a 18 směrů na původních SVG schématech, včetně cranialis, profundus, fibularis a medialis. Funguje i bez WebGL.
+- **Roviny a směry:** 3 roviny a 18 směrů na otáčitelném 3D modelu celého člověka s povrchem těla, včetně cranialis, profundus, fibularis a medialis. Průhledné roviny protínají tělo, směry ukazují prostorové šipky. Končetiny mají automatický detail; hloubku znázorňuje 3D řez tkáněmi.
 
 Čeština a latina se střídají; správná odpověď znamená jeden bod. V otázce jsou čtyři různé možnosti. Každou otázku potkáš v průchodu jednou, stejný základní název kosti může patřit více otázkám. Po odpovědi se zobrazí oba názvy; směry mají také vysvětlení. Nově vybraný kvíz začíná s nulovým skóre.
 
@@ -40,7 +40,7 @@ Skóre se uchovává pouze během otevření stránky. Po obnovení se vynuluje.
 | `dist/` | Zdroj a distribuce statického webu |
 | `dist/bones.json` | Generovaná sada 100 zvýraznitelných kostí |
 | `dist/muscles.json`, `dist/directions.json` | Generované sady svalů a rovin/směrů |
-| `dist/diagrams.js` | Původní anatomická SVG schémata |
+| `dist/orientation.js` | 3D roviny, směrové šipky a řez tkáněmi |
 | `dist/models/` | Anatomický GLB a původní licence |
 | `dist/vendor/` | Lokální Three.js a Draco dekodér |
 | `scripts/` | Vývojový server, generování a kontrola assetů |
@@ -62,6 +62,8 @@ Po změně verze Three.js: `npm run prepare:vendor`. Kosti generuje `node script
 ## Model a licence
 
 GLB: [skeletal.glb](https://github.com/nqwrc/3d-anatomy/blob/master/public/models/skeletal.glb) a [muscular.glb](https://github.com/nqwrc/3d-anatomy/blob/master/public/models/muscular.glb). Staženo 2026-10-06. Geometrie beze změn, pouze materiály a viditelnost za běhu. Používáme kostru a svalstvo, nikoli orgány s dalšími licenčními omezeními. Původní licence a oznámení zachovány v dist/models/.
+
+Povrch člověka `human.glb`: BodyParts3D 3.0 (FMA7163), [GLB export](https://github.com/yamz8/human-body-simulator/blob/main/public/models/anatomy-skin.glb), CC BY-SA 2.1 Japan. Aplikace upravuje velikost, materiál a normály za běhu. Podrobnosti v `dist/models/HUMAN-NOTICE.txt`, licence v souborech `HUMAN-LICENSE*`.
 
 BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan
 

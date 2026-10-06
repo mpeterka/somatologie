@@ -1,12 +1,11 @@
 import { createQuiz } from './quiz.js';
 import { createViewer } from './viewer.js';
-import { createDiagramViewer } from './diagrams.js';
 const $ = id => document.getElementById(id);
 let quiz, viewer, bones, lastBoneId, failed = false, config, generation = 0;
 const quizzes = {
   bones: {title: 'Anatomická kostra', question: 'Která kost je zvýrazněná?', model: 'skeletal'},
   muscles: {title: 'Základní svaly', question: 'Který sval je zvýrazněný?', model: 'muscular'},
-  directions: {title: 'Roviny a směry', question: 'Co znázorňuje obrázek?'}
+  directions: {title: 'Roviny a směry', question: 'Co znázorňuje model?', model: 'human', orientation: true}
 };
 const toolIds = ['focus', 'reset-view', 'back-view', 'ghost'];
 function showError(message) {
@@ -59,9 +58,8 @@ function render() {
   $('question-help').textContent = question.language === 'cs' ? 'Vyber český název.' : 'Vyber latinský název.';
   $('focus').disabled = false;
   if (lastBoneId !== question.bone.id) {
-    if (config.model) viewer.highlight(question.bone.meshIds);
-    else viewer.show(question.bone);
-    viewer.resetView();
+    if (config.orientation) viewer.show(question.bone);
+    else { viewer.highlight(question.bone.meshIds); viewer.resetView(); }
     lastBoneId = question.bone.id;
   }
   question.options.forEach((bone, index) => {
@@ -106,7 +104,7 @@ $('restart').addEventListener('click', () => {
   if (!quiz || failed) return;
   quiz.restart(); lastBoneId = null; render();
 });
-$('focus').addEventListener('click', () => viewer.focus(quiz.question().bone.meshIds));
+$('focus').addEventListener('click', () => config.orientation ? viewer.focusOrientation() : viewer.focus(quiz.question().bone.meshIds));
 $('reset-view').addEventListener('click', () => viewer.resetView());
 $('back-view').addEventListener('click', () => viewer.turnBack());
 $('ghost').addEventListener('click', () => {
@@ -144,10 +142,9 @@ async function start(type) {
   for (const id of [...toolIds, 'restart']) $(id).disabled = true;
   $('ghost').setAttribute('aria-pressed', 'false');
   document.querySelector('.model-tools').hidden = !config.model;
-  $('viewer').classList.toggle('diagram-viewer', !config.model);
-  $('model-help').textContent = config.model ? 'Tažením otáčej · kolečkem nebo dvěma prsty přibližuj. Strany jsou z pohledu těla.' : 'Zlatá značka vyznačuje hledanou rovinu nebo směr. Strany jsou z pohledu zobrazeného těla.';
+  $('model-help').textContent = config.orientation ? 'Zlatá značka určuje hledaný směr nebo rovinu. Tažením otáčej tělo; strany jsou z jeho pohledu.' : 'Tažením otáčej · kolečkem nebo dvěma prsty přibližuj. Strany jsou z pohledu těla.';
   $('focus').querySelector('span').textContent = 'Přiblížit'; $('focus').title = 'Přiblížit zvýrazněnou část';
-  $('reset-view').querySelector('span').textContent = 'Celé tělo'; $('reset-view').title = 'Zobrazit celé tělo';
+  $('reset-view').querySelector('span').textContent = config.orientation ? 'Výchozí pohled' : 'Celé tělo'; $('reset-view').title = config.orientation ? 'Obnovit výchozí pohled na otázku' : 'Zobrazit celé tělo';
   $('ghost').title = 'Ztlumit ostatní části modelu';
   $('choose-quiz').focus({preventScroll: true});
   window.scrollTo(0, 0);
@@ -157,10 +154,10 @@ async function start(type) {
     const data = await response.json();
     if (current !== generation) return;
     bones = data; quiz = createQuiz(bones);
-    const loaded = config.model ? await createViewer($('viewer'), new URL(`./models/${config.model}.glb`, import.meta.url).href, type === 'muscles') : createDiagramViewer($('viewer'));
+    const loaded = await createViewer($('viewer'), new URL(`./models/${config.model}.glb`, import.meta.url).href, config.orientation ? 'human' : type);
     if (current !== generation) { loaded.dispose(); return; }
     viewer = loaded;
-    if (config.model) viewer.validate(bones);
+    if (!config.orientation) viewer.validate(bones);
     if (failed) return;
     $('loading').hidden = true;
     $('bone-count').textContent = `${bones.length} otázek`;
@@ -170,7 +167,7 @@ async function start(type) {
     if (current !== generation) return;
     console.error(error);
     viewer?.dispose(); viewer = null;
-    showError('Zkontroluj připojení. 3D model vyžaduje WebGL 2 a aktuální prohlížeč. Kvíz rovin a směrů funguje také bez WebGL.');
+    showError('Zkontroluj připojení. 3D model vyžaduje WebGL 2 a aktuální prohlížeč.');
   }
 }
 window.addEventListener('pagehide', event => { if (!event.persisted) viewer?.dispose(); });
