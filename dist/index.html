@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#132532">
+  <meta name="description" content="Procvičujte české a latinské názvy 100 kostí na skutečné 3D kostře.">
+  <title>Somatologie — poznej kost</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script>
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <header class="header">
+    <a class="brand" href="./" aria-label="Somatologie — úvod"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M8 12a4 4 0 1 1 4-4l12 12a4 4 0 1 1-4 4Z" fill="none" stroke="currentColor" stroke-width="2.5"/></svg><span>Somatologie</span></a>
+    <span class="header-note">Poznej kost. Nauč se název.</span>
+    <button id="restart" class="text-button" disabled>Začít znovu</button>
+  </header>
+  <main class="workspace">
+    <section class="model-panel" aria-label="Anatomický model">
+      <div class="model-heading"><span>Anatomická kostra</span><span class="model-count" id="bone-count">100 kostí</span></div>
+      <div id="viewer" class="viewer"></div>
+      <div id="loading" class="loading" role="status"><span class="loader" aria-hidden="true"></span><strong>Načítám 3D kostru</strong><span>Chvilku strpení, připravujeme první otázku.</span></div>
+      <div class="model-tools" aria-label="Ovládání modelu">
+        <button id="focus" disabled title="Přiblížit zvýrazněnou kost"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5M7 10h6M10 7v6"/></svg><span>Přiblížit kost</span></button>
+        <button id="reset-view" disabled title="Zobrazit celou kostru"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5"/></svg><span>Celá kostra</span></button>
+        <button id="back-view" disabled title="Otočit pohled o 180 stupňů"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9a8 8 0 1 1 0 6M4 4v5h5"/></svg><span>Otočit</span></button>
+        <button id="ghost" disabled aria-pressed="false" title="Ztlumit ostatní kosti"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg><span>Ztlumit okolí</span></button>
+      </div>
+      <p class="model-help">Tažením otáčej · kolečkem přibližuj <span>Levá a pravá strana jsou z pohledu těla.</span></p>
+    </section>
+    <section class="study-panel" aria-labelledby="question-title">
+      <div class="progress-line"><span id="progress-label">Připravujeme procvičování</span><span id="language" class="language">Česky</span></div>
+      <div class="progress-track" role="progressbar" aria-label="Průchod sadou" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="progress-fill"></div></div>
+      <div class="question-block">
+        <h1 id="question-title">Která kost je <br>zvýrazněná?</h1>
+        <p id="question-help">Vyber její český název.</p>
+      </div>
+      <div id="options" class="options" aria-label="Možnosti odpovědi"></div>
+      <div id="feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true"></div>
+      <button id="next" class="primary" hidden>Další kost <span aria-hidden="true">→</span></button>
+      <div class="score-section">
+        <div class="score-heading"><h2>Tvoje průběžné skóre</h2><span id="score-description">Zatím bez odpovědi</span></div>
+        <div class="score"><div><strong id="correct">0</strong><span>správně</span></div><div><strong id="total">0</strong><span>odpovědí</span></div><div><strong id="percent">0<span>%</span></strong><span>úspěšnost</span></div></div>
+      </div>
+      <p class="study-note">Čeština a latina se střídají po každé otázce. Každou kost potkáš v jednom průchodu právě jednou.</p>
+    </section>
+  </main>
+  <footer><span>100 vybraných kostí pro základní procvičování</span><a href="./attribution.html" target="_blank" rel="noopener">Model, názvosloví a licence</a></footer>
+</body>
+</html>

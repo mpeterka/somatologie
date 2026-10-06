@@ -1,0 +1,904 @@
+[
+  {
+    "id": "Frontal bone",
+    "cs": "Kost čelní",
+    "la": "Os frontale",
+    "region": "Hlava",
+    "meshIds": [
+      "Frontal bone"
+    ]
+  },
+  {
+    "id": "Occipital bone",
+    "cs": "Kost týlní",
+    "la": "Os occipitale",
+    "region": "Hlava",
+    "meshIds": [
+      "Occipital bone"
+    ]
+  },
+  {
+    "id": "Sphenoid bone",
+    "cs": "Kost klínová",
+    "la": "Os sphenoidale",
+    "region": "Hlava",
+    "meshIds": [
+      "Sphenoid bone"
+    ]
+  },
+  {
+    "id": "Ethmoid bone",
+    "cs": "Kost čichová",
+    "la": "Os ethmoidale",
+    "region": "Hlava",
+    "meshIds": [
+      "Ethmoid bone"
+    ]
+  },
+  {
+    "id": "Vomer",
+    "cs": "Kost radličná",
+    "la": "Vomer",
+    "region": "Hlava",
+    "meshIds": [
+      "Vomer"
+    ]
+  },
+  {
+    "id": "Mandible",
+    "cs": "Dolní čelist",
+    "la": "Mandibula",
+    "region": "Hlava",
+    "meshIds": [
+      "Mandible"
+    ]
+  },
+  {
+    "id": "Hyoid bone",
+    "cs": "Jazylka",
+    "la": "Os hyoideum",
+    "region": "Hlava",
+    "meshIds": [
+      "Hyoid bone"
+    ]
+  },
+  {
+    "id": "Parietal bone.l",
+    "cs": "Kost temenní",
+    "la": "Os parietale",
+    "region": "Hlava",
+    "meshIds": [
+      "Parietal bone.l"
+    ]
+  },
+  {
+    "id": "Parietal bone.r",
+    "cs": "Kost temenní",
+    "la": "Os parietale",
+    "region": "Hlava",
+    "meshIds": [
+      "Parietal bone.r"
+    ]
+  },
+  {
+    "id": "Temporal bone.l",
+    "cs": "Kost spánková",
+    "la": "Os temporale",
+    "region": "Hlava",
+    "meshIds": [
+      "Temporal bone.l"
+    ]
+  },
+  {
+    "id": "Temporal bone.r",
+    "cs": "Kost spánková",
+    "la": "Os temporale",
+    "region": "Hlava",
+    "meshIds": [
+      "Temporal bone.r"
+    ]
+  },
+  {
+    "id": "Maxilla.l",
+    "cs": "Horní čelist",
+    "la": "Maxilla",
+    "region": "Hlava",
+    "meshIds": [
+      "Maxilla.l"
+    ]
+  },
+  {
+    "id": "Maxilla.r",
+    "cs": "Horní čelist",
+    "la": "Maxilla",
+    "region": "Hlava",
+    "meshIds": [
+      "Maxilla.r"
+    ]
+  },
+  {
+    "id": "Zygomatic bone.l",
+    "cs": "Kost lícní",
+    "la": "Os zygomaticum",
+    "region": "Hlava",
+    "meshIds": [
+      "Zygomatic bone.l"
+    ]
+  },
+  {
+    "id": "Zygomatic bone.r",
+    "cs": "Kost lícní",
+    "la": "Os zygomaticum",
+    "region": "Hlava",
+    "meshIds": [
+      "Zygomatic bone.r"
+    ]
+  },
+  {
+    "id": "Nasal bone.l",
+    "cs": "Kost nosní",
+    "la": "Os nasale",
+    "region": "Hlava",
+    "meshIds": [
+      "Nasal bone.l"
+    ]
+  },
+  {
+    "id": "Nasal bone.r",
+    "cs": "Kost nosní",
+    "la": "Os nasale",
+    "region": "Hlava",
+    "meshIds": [
+      "Nasal bone.r"
+    ]
+  },
+  {
+    "id": "Palatine bone.l",
+    "cs": "Kost patrová",
+    "la": "Os palatinum",
+    "region": "Hlava",
+    "meshIds": [
+      "Palatine bone.l"
+    ]
+  },
+  {
+    "id": "Palatine bone.r",
+    "cs": "Kost patrová",
+    "la": "Os palatinum",
+    "region": "Hlava",
+    "meshIds": [
+      "Palatine bone.r"
+    ]
+  },
+  {
+    "id": "Atlas (C1)",
+    "cs": "Obratel",
+    "la": "Vertebra",
+    "region": "Páteř",
+    "meshIds": [
+      "Atlas (C1)"
+    ]
+  },
+  {
+    "id": "Axis (C2)",
+    "cs": "Obratel",
+    "la": "Vertebra",
+    "region": "Páteř",
+    "meshIds": [
+      "Axis (C2)"
+    ]
+  },
+  {
+    "id": "Vertebra C3",
+    "cs": "Obratel",
+    "la": "Vertebra",
+    "region": "Páteř",
+    "meshIds": [
+      "Vertebra C3"
+    ]
+  },
+  {
+    "id": "Vertebra C4",
+    "cs": "Obratel",
+    "la": "Vertebra",
+    "region": "Páteř",
+    "meshIds": [
+      "Vertebra C4"
+    ]
+  },
+  {
+    "id": "Vertebra C5",
+    "cs": "Obratel",
+    "la": "Vertebra",
+    "region": "Páteř",
+    "meshIds": [
+      "Vertebra C5"
+    ]
+  },
+  {
+    "id": "Vertebra C6",
+    "cs": "Obratel",
+    "la": "Vertebra",
+    "region": "Páteř",
+    "meshIds": [
+      "Vertebra C6"
+    ]
+  },
+  {
+    "id": "Vertebra C7",
+    "cs": "Obratel",
+    "la": "Vertebra",
+    "region": "Páteř",
+    "meshIds": [
+      "Vertebra C7"
+    ]
+  },
+  {
+    "id": "Vertebra T1",
+    "cs": "Obratel",
+    "la": "Vertebra",
+    "region": "Páteř",
+    "meshIds": [
+      "Vertebra T1"
+    ]
+  },
+  {
+    "id": "Vertebra T2",
+    "cs": "Obratel",
+    "la": "Vertebra",
+    "region": "Páteř",
+    "meshIds": [
+      "Vertebra T2"
+    ]
+  },
+  {
+    "id": "Vertebra T3",
+    "cs": "Obratel",
+    "la": "Vertebra",
+    "region": "Páteř",
+    "meshIds": [
+      "Vertebra T3"
+    ]
+  },
+  {
+    "id": "Vertebra T4",
+    "cs": "Obratel",
+    "la": "Vertebra",
+    "region": "Páteř",
+    "meshIds": [
+      "Vertebra T4"
+    ]
+  },
+  {
+    "id": "Vertebra T5",
+    "cs": "Obratel",
+    "la": "Vertebra",
+    "region": "Páteř",
+    "meshIds": [
+      "Vertebra T5"
+    ]
+  },
+  {
+    "id": "Vertebra T6",
+    "cs": "Obratel",
+    "la": "Vertebra",
+    "region": "Páteř",
+    "meshIds": [
+      "Vertebra T6"
+    ]
+  },
+  {
+    "id": "Vertebra T7",
+    "cs": "Obratel",
+    "la": "Vertebra",
+    "region": "Páteř",
+    "meshIds": [
+      "Vertebra T7"
+    ]
+  },
+  {
+    "id": "Vertebra T8",
+    "cs": "Obratel",
+    "la": "Vertebra",
+    "region": "Páteř",
+    "meshIds": [
+      "Vertebra T8"
+    ]
+  },
+  {
+    "id": "Vertebra T9",
+    "cs": "Obratel",
+    "la": "Vertebra",
+    "region": "Páteř",
+    "meshIds": [
+      "Vertebra T9"
+    ]
+  },
+  {
+    "id": "Vertebra T10",
+    "cs": "Obratel",
+    "la": "Vertebra",
+    "region": "Páteř",
+    "meshIds": [
+      "Vertebra T10"
+    ]
+  },
+  {
+    "id": "Vertebra T11",
+    "cs": "Obratel",
+    "la": "Vertebra",
+    "region": "Páteř",
+    "meshIds": [
+      "Vertebra T11"
+    ]
+  },
+  {
+    "id": "Vertebra T12",
+    "cs": "Obratel",
+    "la": "Vertebra",
+    "region": "Páteř",
+    "meshIds": [
+      "Vertebra T12"
+    ]
+  },
+  {
+    "id": "Vertebra L1",
+    "cs": "Obratel",
+    "la": "Vertebra",
+    "region": "Páteř",
+    "meshIds": [
+      "Vertebra L1"
+    ]
+  },
+  {
+    "id": "Vertebra L2",
+    "cs": "Obratel",
+    "la": "Vertebra",
+    "region": "Páteř",
+    "meshIds": [
+      "Vertebra L2"
+    ]
+  },
+  {
+    "id": "Vertebra L3",
+    "cs": "Obratel",
+    "la": "Vertebra",
+    "region": "Páteř",
+    "meshIds": [
+      "Vertebra L3"
+    ]
+  },
+  {
+    "id": "Vertebra L4",
+    "cs": "Obratel",
+    "la": "Vertebra",
+    "region": "Páteř",
+    "meshIds": [
+      "Vertebra L4"
+    ]
+  },
+  {
+    "id": "Vertebra L5",
+    "cs": "Obratel",
+    "la": "Vertebra",
+    "region": "Páteř",
+    "meshIds": [
+      "Vertebra L5"
+    ]
+  },
+  {
+    "id": "Sacrum",
+    "cs": "Kost křížová",
+    "la": "Os sacrum",
+    "region": "Páteř",
+    "meshIds": [
+      "Sacrum"
+    ]
+  },
+  {
+    "id": "Coccyx",
+    "cs": "Kostrč",
+    "la": "Os coccygis",
+    "region": "Páteř",
+    "meshIds": [
+      "Coccyx"
+    ]
+  },
+  {
+    "id": "First rib.l",
+    "cs": "Žebro",
+    "la": "Costa",
+    "region": "Hrudník",
+    "meshIds": [
+      "First rib.l"
+    ]
+  },
+  {
+    "id": "First rib.r",
+    "cs": "Žebro",
+    "la": "Costa",
+    "region": "Hrudník",
+    "meshIds": [
+      "First rib.r"
+    ]
+  },
+  {
+    "id": "Second rib.l",
+    "cs": "Žebro",
+    "la": "Costa",
+    "region": "Hrudník",
+    "meshIds": [
+      "Second rib.l"
+    ]
+  },
+  {
+    "id": "Second rib.r",
+    "cs": "Žebro",
+    "la": "Costa",
+    "region": "Hrudník",
+    "meshIds": [
+      "Second rib.r"
+    ]
+  },
+  {
+    "id": "Third rib.l",
+    "cs": "Žebro",
+    "la": "Costa",
+    "region": "Hrudník",
+    "meshIds": [
+      "Third rib.l"
+    ]
+  },
+  {
+    "id": "Third rib.r",
+    "cs": "Žebro",
+    "la": "Costa",
+    "region": "Hrudník",
+    "meshIds": [
+      "Third rib.r"
+    ]
+  },
+  {
+    "id": "Fourth rib.l",
+    "cs": "Žebro",
+    "la": "Costa",
+    "region": "Hrudník",
+    "meshIds": [
+      "Fourth rib.l"
+    ]
+  },
+  {
+    "id": "Fourth rib.r",
+    "cs": "Žebro",
+    "la": "Costa",
+    "region": "Hrudník",
+    "meshIds": [
+      "Fourth rib.r"
+    ]
+  },
+  {
+    "id": "Fifth rib.l",
+    "cs": "Žebro",
+    "la": "Costa",
+    "region": "Hrudník",
+    "meshIds": [
+      "Fifth rib.l"
+    ]
+  },
+  {
+    "id": "Fifth rib.r",
+    "cs": "Žebro",
+    "la": "Costa",
+    "region": "Hrudník",
+    "meshIds": [
+      "Fifth rib.r"
+    ]
+  },
+  {
+    "id": "Sixth rib.l",
+    "cs": "Žebro",
+    "la": "Costa",
+    "region": "Hrudník",
+    "meshIds": [
+      "Sixth rib.l"
+    ]
+  },
+  {
+    "id": "Sixth rib.r",
+    "cs": "Žebro",
+    "la": "Costa",
+    "region": "Hrudník",
+    "meshIds": [
+      "Sixth rib.r"
+    ]
+  },
+  {
+    "id": "Seventh rib.l",
+    "cs": "Žebro",
+    "la": "Costa",
+    "region": "Hrudník",
+    "meshIds": [
+      "Seventh rib.l"
+    ]
+  },
+  {
+    "id": "Seventh rib.r",
+    "cs": "Žebro",
+    "la": "Costa",
+    "region": "Hrudník",
+    "meshIds": [
+      "Seventh rib.r"
+    ]
+  },
+  {
+    "id": "Eighth rib.l",
+    "cs": "Žebro",
+    "la": "Costa",
+    "region": "Hrudník",
+    "meshIds": [
+      "Eighth rib.l"
+    ]
+  },
+  {
+    "id": "Eighth rib.r",
+    "cs": "Žebro",
+    "la": "Costa",
+    "region": "Hrudník",
+    "meshIds": [
+      "Eighth rib.r"
+    ]
+  },
+  {
+    "id": "Ninth rib.l",
+    "cs": "Žebro",
+    "la": "Costa",
+    "region": "Hrudník",
+    "meshIds": [
+      "Ninth rib.l"
+    ]
+  },
+  {
+    "id": "Ninth rib.r",
+    "cs": "Žebro",
+    "la": "Costa",
+    "region": "Hrudník",
+    "meshIds": [
+      "Ninth rib.r"
+    ]
+  },
+  {
+    "id": "Tenth rib.l",
+    "cs": "Žebro",
+    "la": "Costa",
+    "region": "Hrudník",
+    "meshIds": [
+      "Tenth rib.l"
+    ]
+  },
+  {
+    "id": "Tenth rib.r",
+    "cs": "Žebro",
+    "la": "Costa",
+    "region": "Hrudník",
+    "meshIds": [
+      "Tenth rib.r"
+    ]
+  },
+  {
+    "id": "Eleventh rib.l",
+    "cs": "Žebro",
+    "la": "Costa",
+    "region": "Hrudník",
+    "meshIds": [
+      "Eleventh rib.l"
+    ]
+  },
+  {
+    "id": "Eleventh rib.r",
+    "cs": "Žebro",
+    "la": "Costa",
+    "region": "Hrudník",
+    "meshIds": [
+      "Eleventh rib.r"
+    ]
+  },
+  {
+    "id": "Twelfth rib.l",
+    "cs": "Žebro",
+    "la": "Costa",
+    "region": "Hrudník",
+    "meshIds": [
+      "Twelfth rib.l"
+    ]
+  },
+  {
+    "id": "Twelfth rib.r",
+    "cs": "Žebro",
+    "la": "Costa",
+    "region": "Hrudník",
+    "meshIds": [
+      "Twelfth rib.r"
+    ]
+  },
+  {
+    "id": "Sternum",
+    "cs": "Kost hrudní",
+    "la": "Sternum",
+    "region": "Hrudník",
+    "meshIds": [
+      "Manubrium of sternum",
+      "Body of sternum",
+      "Xiphoid process"
+    ]
+  },
+  {
+    "id": "Clavicle.l",
+    "cs": "Kost klíční",
+    "la": "Clavicula",
+    "region": "Horní končetina",
+    "meshIds": [
+      "Clavicle.l"
+    ]
+  },
+  {
+    "id": "Clavicle.r",
+    "cs": "Kost klíční",
+    "la": "Clavicula",
+    "region": "Horní končetina",
+    "meshIds": [
+      "Clavicle.r"
+    ]
+  },
+  {
+    "id": "Scapula.l",
+    "cs": "Lopatka",
+    "la": "Scapula",
+    "region": "Horní končetina",
+    "meshIds": [
+      "Scapula.l"
+    ]
+  },
+  {
+    "id": "Scapula.r",
+    "cs": "Lopatka",
+    "la": "Scapula",
+    "region": "Horní končetina",
+    "meshIds": [
+      "Scapula.r"
+    ]
+  },
+  {
+    "id": "Humerus.l",
+    "cs": "Kost pažní",
+    "la": "Humerus",
+    "region": "Horní končetina",
+    "meshIds": [
+      "Humerus.l"
+    ]
+  },
+  {
+    "id": "Humerus.r",
+    "cs": "Kost pažní",
+    "la": "Humerus",
+    "region": "Horní končetina",
+    "meshIds": [
+      "Humerus.r"
+    ]
+  },
+  {
+    "id": "Radius.l",
+    "cs": "Kost vřetenní",
+    "la": "Radius",
+    "region": "Horní končetina",
+    "meshIds": [
+      "Radius.l"
+    ]
+  },
+  {
+    "id": "Radius.r",
+    "cs": "Kost vřetenní",
+    "la": "Radius",
+    "region": "Horní končetina",
+    "meshIds": [
+      "Radius.r"
+    ]
+  },
+  {
+    "id": "Ulna.l",
+    "cs": "Kost loketní",
+    "la": "Ulna",
+    "region": "Horní končetina",
+    "meshIds": [
+      "Ulna.l"
+    ]
+  },
+  {
+    "id": "Ulna.r",
+    "cs": "Kost loketní",
+    "la": "Ulna",
+    "region": "Horní končetina",
+    "meshIds": [
+      "Ulna.r"
+    ]
+  },
+  {
+    "id": "Scaphoid bone.l",
+    "cs": "Kost loďkovitá (zápěstí)",
+    "la": "Os scaphoideum",
+    "region": "Horní končetina",
+    "meshIds": [
+      "Scaphoid bone.l"
+    ]
+  },
+  {
+    "id": "Scaphoid bone.r",
+    "cs": "Kost loďkovitá (zápěstí)",
+    "la": "Os scaphoideum",
+    "region": "Horní končetina",
+    "meshIds": [
+      "Scaphoid bone.r"
+    ]
+  },
+  {
+    "id": "Capitate bone.l",
+    "cs": "Kost hlavatá",
+    "la": "Os capitatum",
+    "region": "Horní končetina",
+    "meshIds": [
+      "Capitate bone.l"
+    ]
+  },
+  {
+    "id": "Capitate bone.r",
+    "cs": "Kost hlavatá",
+    "la": "Os capitatum",
+    "region": "Horní končetina",
+    "meshIds": [
+      "Capitate bone.r"
+    ]
+  },
+  {
+    "id": "Hip bone.l",
+    "cs": "Kost pánevní",
+    "la": "Os coxae",
+    "region": "Dolní končetina",
+    "meshIds": [
+      "Hip bone.l"
+    ]
+  },
+  {
+    "id": "Hip bone.r",
+    "cs": "Kost pánevní",
+    "la": "Os coxae",
+    "region": "Dolní končetina",
+    "meshIds": [
+      "Hip bone.r"
+    ]
+  },
+  {
+    "id": "Femur.l",
+    "cs": "Kost stehenní",
+    "la": "Femur",
+    "region": "Dolní končetina",
+    "meshIds": [
+      "Femur.l"
+    ]
+  },
+  {
+    "id": "Femur.r",
+    "cs": "Kost stehenní",
+    "la": "Femur",
+    "region": "Dolní končetina",
+    "meshIds": [
+      "Femur.r"
+    ]
+  },
+  {
+    "id": "Patella.l",
+    "cs": "Čéška",
+    "la": "Patella",
+    "region": "Dolní končetina",
+    "meshIds": [
+      "Patella.l"
+    ]
+  },
+  {
+    "id": "Patella.r",
+    "cs": "Čéška",
+    "la": "Patella",
+    "region": "Dolní končetina",
+    "meshIds": [
+      "Patella.r"
+    ]
+  },
+  {
+    "id": "Tibia.l",
+    "cs": "Kost holenní",
+    "la": "Tibia",
+    "region": "Dolní končetina",
+    "meshIds": [
+      "Tibia.l"
+    ]
+  },
+  {
+    "id": "Tibia.r",
+    "cs": "Kost holenní",
+    "la": "Tibia",
+    "region": "Dolní končetina",
+    "meshIds": [
+      "Tibia.r"
+    ]
+  },
+  {
+    "id": "Fibula.l",
+    "cs": "Kost lýtková",
+    "la": "Fibula",
+    "region": "Dolní končetina",
+    "meshIds": [
+      "Fibula.l"
+    ]
+  },
+  {
+    "id": "Fibula.r",
+    "cs": "Kost lýtková",
+    "la": "Fibula",
+    "region": "Dolní končetina",
+    "meshIds": [
+      "Fibula.r"
+    ]
+  },
+  {
+    "id": "Talus.l",
+    "cs": "Kost hlezenní",
+    "la": "Talus",
+    "region": "Dolní končetina",
+    "meshIds": [
+      "Talus.l"
+    ]
+  },
+  {
+    "id": "Talus.r",
+    "cs": "Kost hlezenní",
+    "la": "Talus",
+    "region": "Dolní končetina",
+    "meshIds": [
+      "Talus.r"
+    ]
+  },
+  {
+    "id": "Calcaneus.l",
+    "cs": "Kost patní",
+    "la": "Calcaneus",
+    "region": "Dolní končetina",
+    "meshIds": [
+      "Calcaneus.l"
+    ]
+  },
+  {
+    "id": "Calcaneus.r",
+    "cs": "Kost patní",
+    "la": "Calcaneus",
+    "region": "Dolní končetina",
+    "meshIds": [
+      "Calcaneus.r"
+    ]
+  },
+  {
+    "id": "Navicular bone.l",
+    "cs": "Kost člunková (zánártí)",
+    "la": "Os naviculare",
+    "region": "Dolní končetina",
+    "meshIds": [
+      "Navicular bone.l"
+    ]
+  },
+  {
+    "id": "Navicular bone.r",
+    "cs": "Kost člunková (zánártí)",
+    "la": "Os naviculare",
+    "region": "Dolní končetina",
+    "meshIds": [
+      "Navicular bone.r"
+    ]
+  }
+]
