@@ -13,6 +13,8 @@ npm run dev
 Web běží na `http://127.0.0.1:4173`. Zdroj webu je přímo v `dist/`.
 Nevyžaduje build. Změny názvosloví prováděj v `scripts/create-bones.mjs`
 a potom vygeneruj `dist/bones.json`.
+Svaly a směry mají generátor `scripts/create-extra-quizzes.mjs`.
+Před nasazením vyzkoušej všechny tři režimy a návrat do úvodní nabídky.
 
 ## Před odesláním změn
 

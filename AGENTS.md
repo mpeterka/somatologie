@@ -2,7 +2,8 @@
 
 ## Projekt
 
-Somatologie je statická česká aplikace pro poznávání kostí na 3D modelu.
+Somatologie je statická česká aplikace pro poznávání kostí a svalů na 3D modelech
+a pro procvičování rovin a směrů na původních SVG schématech.
 Používá JavaScript ES modules, Three.js a WebGL 2. Nemá backend ani bundler.
 Adresář `dist/` obsahuje udržovaný zdroj webu i distribuované soubory; není to
 odstranitelný build output. GitHub Pages publikuje tento adresář z větve `main`.
@@ -13,6 +14,8 @@ odstranitelný build output. GitHub Pages publikuje tento adresář z větve `ma
 - `dist/quiz.js`: pravidla a stav kvízu bez DOM nebo Three.js.
 - `dist/viewer.js`, `dist/model-utils.js`: vykreslení a identita kostí.
 - `scripts/create-bones.mjs`: zdroj anatomické sady; generuje `dist/bones.json`.
+- `scripts/create-extra-quizzes.mjs`: generuje základní svaly a roviny/směry.
+- `dist/diagrams.js`: anatomická schémata; strany vždy z pohledu těla.
 - `scripts/validate-assets.mjs`: kontrola dat a jejich vazeb na GLB.
 - `scripts/prepare-vendor.mjs`: kopírování instalované verze Three.js a Draco.
 - `tests/`: testy přes vestavěný `node:test`.
@@ -24,6 +27,9 @@ odstranitelný build output. GitHub Pages publikuje tento adresář z větve `ma
 - Uživatelské texty piš česky, stručně a věcně. Zachovej ovládání klávesnicí,
   dotykové ovládání a responzivní rozložení.
 - Data měň v generátoru, poté spusť `node scripts/create-bones.mjs`.
+  Pro svaly a směry spusť `node scripts/create-extra-quizzes.mjs`.
+- Nabídka kvízů se zobrazuje jako první. Nově vybraný kvíz má vlastní nulové
+  skóre. Při návratu do nabídky uvolni 3D zdroje a odstraň canvas.
 - Názvy jsou základní, bez čísel obratlů/žeber a bez stran. Opakované názvy
   jsou povolené; ID zvýraznitelných kostí musí zůstat jedinečná. Čtyři možnosti
   každé otázky musí mít různé názvy v obou jazycích.

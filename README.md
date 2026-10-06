@@ -4,7 +4,13 @@
 
 [Repozitář na GitHubu](https://github.com/mpeterka/somatologie)
 
-Statická aplikace s WebGL kostrou a kvízem 100 zvýraznitelných kostí (33 základních názvů). České a latinské otázky se střídají; správná odpověď znamená jeden bod. Průchod nemá opakované konkrétní kosti. Názvy jsou zjednodušené bez stran a čísel: Obratel / Vertebra, Žebro / Costa atd. Stejný základní název se tedy může v průchodu opakovat na jiné kosti. V jedné otázce jsou vždy čtyři různé možnosti.
+Statická aplikace se třemi kvízy, které vybíráš na úvodní obrazovce:
+
+- **Kosti:** WebGL kostra, 100 zvýraznitelných kostí a 33 základních názvů bez stran a čísel (Obratel / Vertebra, Žebro / Costa).
+- **Svaly:** WebGL svalový model a 15 základních svalů. Hlavy, části a obě strany jednoho svalu se zvýrazňují společně.
+- **Roviny a směry:** 3 roviny a 18 směrů na původních SVG schématech, včetně cranialis, profundus, fibularis a medialis. Funguje i bez WebGL.
+
+Čeština a latina se střídají; správná odpověď znamená jeden bod. V otázce jsou čtyři různé možnosti. Každou otázku potkáš v průchodu jednou, stejný základní název kosti může patřit více otázkám. Po odpovědi se zobrazí oba názvy; směry mají také vysvětlení. Nově vybraný kvíz začíná s nulovým skóre.
 
 ## Spuštění
 
@@ -21,9 +27,9 @@ Otevřít http://127.0.0.1:4173. Distribuce `dist/` obsahuje všechny potřebné
 ## Ovládání
 
 - Otáčej kostrou tažením myši nebo prstu. Přibližuj kolečkem nebo dvěma prsty.
-- „Přiblížit kost“ zaměří zvýrazněnou kost, „Celá kostra“ obnoví celkový pohled.
+- „Přiblížit“ zaměří zvýrazněnou část, „Celé tělo“ obnoví celkový pohled.
 - Vyber jednu ze čtyř možností. Po odpovědi uvidíš český i latinský název.
-- „Další kost“ pokračuje v procvičování; „Začít znovu“ vynuluje skóre.
+- „Další otázka“ pokračuje; „Začít znovu“ vynuluje skóre. „Výběr kvízu“ vrátí nabídku.
 
 Skóre se uchovává pouze během otevření stránky. Po obnovení se vynuluje.
 
@@ -33,6 +39,8 @@ Skóre se uchovává pouze během otevření stránky. Po obnovení se vynuluje.
 | --- | --- |
 | `dist/` | Zdroj a distribuce statického webu |
 | `dist/bones.json` | Generovaná sada 100 zvýraznitelných kostí |
+| `dist/muscles.json`, `dist/directions.json` | Generované sady svalů a rovin/směrů |
+| `dist/diagrams.js` | Původní anatomická SVG schémata |
 | `dist/models/` | Anatomický GLB a původní licence |
 | `dist/vendor/` | Lokální Three.js a Draco dekodér |
 | `scripts/` | Vývojový server, generování a kontrola assetů |
@@ -49,11 +57,11 @@ npm test
 npm run validate
 ```
 
-Po změně verze Three.js: `npm run prepare:vendor`. Sadu kostí generuje `node scripts/create-bones.mjs`; po úpravě názvů nebo mapování vždy spustit validátor. Zdrojem identity modelu jsou `extras.za_name`, včetně skupin složených z více meshů. Sdílená geometrie neznačí totožnou kost.
+Po změně verze Three.js: `npm run prepare:vendor`. Kosti generuje `node scripts/create-bones.mjs`, svaly a směry `node scripts/create-extra-quizzes.mjs`. Po úpravě názvů nebo mapování spustit validátor. Zdrojem identity modelu jsou `extras.za_name`, včetně skupin složených z více meshů. Sdílená geometrie neznačí totožnou část těla.
 
 ## Model a licence
 
-GLB: https://github.com/nqwrc/3d-anatomy/blob/master/public/models/skeletal.glb . Model stažen 2026-10-06. Geometrie beze změn, pouze materiály a viditelnost za běhu. Z celé upstream sady používáme pouze kostru, nikoli orgány s dalšími licenčními omezeními. Původní licence a oznámení zachovány v dist/models/.
+GLB: [skeletal.glb](https://github.com/nqwrc/3d-anatomy/blob/master/public/models/skeletal.glb) a [muscular.glb](https://github.com/nqwrc/3d-anatomy/blob/master/public/models/muscular.glb). Staženo 2026-10-06. Geometrie beze změn, pouze materiály a viditelnost za běhu. Používáme kostru a svalstvo, nikoli orgány s dalšími licenčními omezeními. Původní licence a oznámení zachovány v dist/models/.
 
 BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan
 

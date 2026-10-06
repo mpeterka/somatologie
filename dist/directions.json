@@ -1,0 +1,149 @@
+[
+  {
+    "id": "sagittalis",
+    "cs": "Sagitální (šípová) rovina",
+    "la": "Planum sagittale",
+    "region": "Roviny",
+    "explanation": "Dělí tělo na levou a pravou část."
+  },
+  {
+    "id": "frontalis",
+    "cs": "Frontální (čelní) rovina",
+    "la": "Planum frontale",
+    "region": "Roviny",
+    "explanation": "Dělí tělo na přední a zadní část."
+  },
+  {
+    "id": "transversalis",
+    "cs": "Transverzální (příčná) rovina",
+    "la": "Planum transversum",
+    "region": "Roviny",
+    "explanation": "Dělí tělo na horní a dolní část."
+  },
+  {
+    "id": "cranialis",
+    "cs": "Kraniální — k hlavě",
+    "la": "Cranialis",
+    "region": "Směry",
+    "explanation": "Směr k hlavě."
+  },
+  {
+    "id": "caudalis",
+    "cs": "Kaudální — k dolnímu konci těla",
+    "la": "Caudalis",
+    "region": "Směry",
+    "explanation": "Směr k dolnímu konci trupu."
+  },
+  {
+    "id": "ventralis",
+    "cs": "Ventrální — dopředu",
+    "la": "Ventralis",
+    "region": "Směry",
+    "explanation": "Směr k přední, břišní straně těla."
+  },
+  {
+    "id": "dorsalis",
+    "cs": "Dorzální — dozadu",
+    "la": "Dorsalis",
+    "region": "Směry",
+    "explanation": "Směr k zadní, zádové straně těla."
+  },
+  {
+    "id": "medialis",
+    "cs": "Mediální — ke střední rovině",
+    "la": "Medialis",
+    "region": "Směry",
+    "explanation": "Směr ke střední rovině těla."
+  },
+  {
+    "id": "lateralis",
+    "cs": "Laterální — od střední roviny",
+    "la": "Lateralis",
+    "region": "Směry",
+    "explanation": "Směr od střední roviny ke straně."
+  },
+  {
+    "id": "proximalis",
+    "cs": "Proximální — k trupu",
+    "la": "Proximalis",
+    "region": "Směry",
+    "explanation": "Na končetině směrem k jejímu připojení k trupu."
+  },
+  {
+    "id": "distalis",
+    "cs": "Distální — od trupu",
+    "la": "Distalis",
+    "region": "Směry",
+    "explanation": "Na končetině směrem od jejího připojení k trupu."
+  },
+  {
+    "id": "superficialis",
+    "cs": "Povrchový — k povrchu",
+    "la": "Superficialis",
+    "region": "Hloubka",
+    "explanation": "Blíže k povrchu těla."
+  },
+  {
+    "id": "profundus",
+    "cs": "Hluboký — do hloubky",
+    "la": "Profundus",
+    "region": "Hloubka",
+    "explanation": "Dále od povrchu, do hloubky těla."
+  },
+  {
+    "id": "radialis",
+    "cs": "Radiální — k palcové straně",
+    "la": "Radialis",
+    "region": "Končetiny",
+    "explanation": "Na předloktí směrem k vřetenní kosti, na palcovou stranu."
+  },
+  {
+    "id": "ulnaris",
+    "cs": "Ulnární — k malíkové straně",
+    "la": "Ulnaris",
+    "region": "Končetiny",
+    "explanation": "Na předloktí směrem k loketní kosti, na malíkovou stranu."
+  },
+  {
+    "id": "tibialis",
+    "cs": "Tibiální — k holenní kosti",
+    "la": "Tibialis",
+    "region": "Končetiny",
+    "explanation": "Na bérci směrem k holenní kosti, na vnitřní stranu."
+  },
+  {
+    "id": "fibularis",
+    "cs": "Fibulární — k lýtkové kosti",
+    "la": "Fibularis",
+    "region": "Končetiny",
+    "explanation": "Na bérci směrem k lýtkové kosti, na zevní stranu."
+  },
+  {
+    "id": "palmaris",
+    "cs": "Dlaňový",
+    "la": "Palmaris",
+    "region": "Končetiny",
+    "explanation": "Směr k dlani, dlaňová strana ruky."
+  },
+  {
+    "id": "plantaris",
+    "cs": "Chodidlový",
+    "la": "Plantaris",
+    "region": "Končetiny",
+    "explanation": "Směr k plosce, chodidlová strana nohy."
+  },
+  {
+    "id": "dexter",
+    "cs": "Pravý",
+    "la": "Dexter",
+    "region": "Směry",
+    "explanation": "Pravá strana z pohledu člověka na obrázku."
+  },
+  {
+    "id": "sinister",
+    "cs": "Levý",
+    "la": "Sinister",
+    "region": "Směry",
+    "explanation": "Levá strana z pohledu člověka na obrázku."
+  }
+]

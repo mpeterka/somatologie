@@ -1,17 +1,23 @@
 import { createQuiz } from './quiz.js';
 import { createViewer } from './viewer.js';
+import { createDiagramViewer } from './diagrams.js';
 const $ = id => document.getElementById(id);
-let quiz, viewer, bones, lastBoneId, failed = false;
+let quiz, viewer, bones, lastBoneId, failed = false, config, generation = 0;
+const quizzes = {
+  bones: {title: 'Anatomická kostra', question: 'Která kost je zvýrazněná?', model: 'skeletal'},
+  muscles: {title: 'Základní svaly', question: 'Který sval je zvýrazněný?', model: 'muscular'},
+  directions: {title: 'Roviny a směry', question: 'Co znázorňuje obrázek?'}
+};
 const toolIds = ['focus', 'reset-view', 'back-view', 'ghost'];
 function showError(message) {
   failed = true;
   $('loading').hidden = false;
   $('loading').classList.add('error');
-  $('loading').querySelector('strong').textContent = 'Kostru se nepodařilo zobrazit';
+  $('loading').querySelector('strong').textContent = 'Kvíz se nepodařilo načíst';
   $('loading').querySelector('span:last-child').textContent = message;
   $('progress-label').textContent = 'Procvičování není dostupné';
-  $('question-title').textContent = 'Obnov stránku a zkus to znovu.';
-  $('question-help').textContent = 'Pro procvičování musí být 3D kostra načtená.';
+  $('question-title').textContent = 'Vrať se k výběru a zkus to znovu.';
+  $('question-help').textContent = 'Pro procvičování musí být data a obrázek načtené.';
   $('options').replaceChildren(); $('feedback').textContent = ''; $('next').hidden = true;
   for (const id of [...toolIds, 'restart']) $(id).disabled = true;
 }
@@ -35,8 +41,8 @@ function render() {
   if (!question) {
     viewer.highlight([]);
     $('question-title').textContent = 'Průchod dokončený.';
-    $('question-help').textContent = 'Všech 100 kostí máš za sebou.';
-    $('progress-label').textContent = `${bones.length} z ${bones.length} kostí`;
+    $('question-help').textContent = `Všech ${bones.length} otázek máš za sebou.`;
+    $('progress-label').textContent = `${bones.length} z ${bones.length} otázek`;
     $('language').textContent = 'Hotovo';
     $('focus').disabled = true;
     const summary = document.createElement('div'); summary.className = 'finished';
@@ -46,13 +52,15 @@ function render() {
     $('next').hidden = false; $('next').textContent = 'Nový průchod';
     return;
   }
+  $('question-title').textContent = config.question;
   $('progress-label').textContent = `Otázka ${quiz.score().total + (question.answered ? 0 : 1)} ze ${bones.length}`;
   $('language').textContent = question.language === 'cs' ? 'Česky' : 'Latinsky';
   $('language').classList.toggle('latin', question.language === 'la');
-  $('question-help').textContent = question.language === 'cs' ? 'Vyber její český název.' : 'Vyber její latinský název.';
+  $('question-help').textContent = question.language === 'cs' ? 'Vyber český název.' : 'Vyber latinský název.';
   $('focus').disabled = false;
   if (lastBoneId !== question.bone.id) {
-    viewer.highlight(question.bone.meshIds);
+    if (config.model) viewer.highlight(question.bone.meshIds);
+    else viewer.show(question.bone);
     viewer.resetView();
     lastBoneId = question.bone.id;
   }
@@ -80,19 +88,23 @@ function render() {
     const title = document.createElement('strong'); title.textContent = right ? 'Správně!' : 'Tentokrát ne. Správná odpověď:';
     const translation = document.createElement('span'); translation.className = 'translation'; translation.textContent = `${question.bone.cs} — ${question.bone.la}`;
     $('feedback').append(title, translation);
+    if (question.bone.explanation) {
+      const explanation = document.createElement('span'); explanation.className = 'translation';
+      explanation.textContent = question.bone.explanation; $('feedback').append(explanation);
+    }
     $('next').hidden = false;
-    $('next').textContent = quiz.score().total === bones.length ? 'Zobrazit výsledek →' : 'Další kost →';
+    $('next').textContent = quiz.score().total === bones.length ? 'Zobrazit výsledek →' : 'Další otázka →';
   }
 }
 $('next').addEventListener('click', () => {
   if (failed) return;
-  if (!quiz.question()) { quiz.restart(); lastBoneId = null; $('question-title').innerHTML = 'Která kost je <br>zvýrazněná?'; }
+  if (!quiz.question()) { quiz.restart(); lastBoneId = null; }
   else quiz.next();
   render(); $('options').querySelector('button')?.focus({preventScroll: true});
 });
 $('restart').addEventListener('click', () => {
   if (!quiz || failed) return;
-  quiz.restart(); lastBoneId = null; $('question-title').innerHTML = 'Která kost je <br>zvýrazněná?'; render();
+  quiz.restart(); lastBoneId = null; render();
 });
 $('focus').addEventListener('click', () => viewer.focus(quiz.question().bone.meshIds));
 $('reset-view').addEventListener('click', () => viewer.resetView());
@@ -102,22 +114,63 @@ $('ghost').addEventListener('click', () => {
   $('ghost').setAttribute('aria-pressed', enabled); viewer.isolate(enabled);
 });
 $('viewer').addEventListener('viewererror', event => showError(event.detail));
-async function start() {
+function menu() {
+  generation++; viewer?.dispose(); viewer = null; quiz = null;
+  $('workspace').hidden = true; $('quiz-menu').hidden = false;
+  $('restart').hidden = true; $('choose-quiz').hidden = true;
+  $('viewer').replaceChildren();
+  window.scrollTo(0, 0);
+  document.querySelector('[data-quiz]')?.focus({preventScroll: true});
+}
+$('choose-quiz').addEventListener('click', menu);
+document.querySelectorAll('[data-quiz]').forEach(button => button.addEventListener('click', () => start(button.dataset.quiz)));
+async function start(type) {
+  const current = ++generation;
+  config = quizzes[type]; failed = false; lastBoneId = null;
+  $('quiz-menu').hidden = true; $('workspace').hidden = false;
+  $('restart').hidden = false; $('choose-quiz').hidden = false;
+  $('model-title').textContent = config.title;
+  $('bone-count').textContent = 'Připravuji…';
+  $('loading').hidden = false; $('loading').classList.remove('error');
+  $('loading').querySelector('strong').textContent = config.model ? 'Načítám 3D model' : 'Načítám obrázky';
+  $('loading').querySelector('span:last-child').textContent = 'Chvilku strpení, připravujeme první otázku.';
+  $('question-title').textContent = config.question;
+  $('question-help').textContent = 'Připravujeme první otázku.';
+  $('options').replaceChildren(); $('feedback').replaceChildren(); $('next').hidden = true;
+  $('correct').textContent = '0'; $('total').textContent = '0'; $('percent').textContent = '0%';
+  $('score-description').textContent = 'Zatím bez odpovědi'; $('progress-label').textContent = 'Připravuji kvíz';
+  $('language').textContent = 'Česky'; $('language').classList.remove('latin');
+  $('progress-fill').style.width = '0%'; document.querySelector('[role=progressbar]').setAttribute('aria-valuenow', 0);
+  for (const id of [...toolIds, 'restart']) $(id).disabled = true;
+  $('ghost').setAttribute('aria-pressed', 'false');
+  document.querySelector('.model-tools').hidden = !config.model;
+  $('viewer').classList.toggle('diagram-viewer', !config.model);
+  $('model-help').textContent = config.model ? 'Tažením otáčej · kolečkem nebo dvěma prsty přibližuj. Strany jsou z pohledu těla.' : 'Zlatá značka vyznačuje hledanou rovinu nebo směr. Strany jsou z pohledu zobrazeného těla.';
+  $('focus').querySelector('span').textContent = 'Přiblížit'; $('focus').title = 'Přiblížit zvýrazněnou část';
+  $('reset-view').querySelector('span').textContent = 'Celé tělo'; $('reset-view').title = 'Zobrazit celé tělo';
+  $('ghost').title = 'Ztlumit ostatní části modelu';
+  $('choose-quiz').focus({preventScroll: true});
+  window.scrollTo(0, 0);
   try {
-    const response = await fetch(new URL('./bones.json', import.meta.url));
-    if (!response.ok) throw new Error('Seznam kostí se nepodařilo načíst.');
-    bones = await response.json(); quiz = createQuiz(bones);
-    viewer = await createViewer($('viewer'), new URL('./models/skeletal.glb', import.meta.url).href);
-    viewer.validate(bones);
+    const response = await fetch(new URL(`./${type}.json`, import.meta.url));
+    if (!response.ok) throw new Error('Data kvízu se nepodařilo načíst.');
+    const data = await response.json();
+    if (current !== generation) return;
+    bones = data; quiz = createQuiz(bones);
+    const loaded = config.model ? await createViewer($('viewer'), new URL(`./models/${config.model}.glb`, import.meta.url).href, type === 'muscles') : createDiagramViewer($('viewer'));
+    if (current !== generation) { loaded.dispose(); return; }
+    viewer = loaded;
+    if (config.model) viewer.validate(bones);
     if (failed) return;
     $('loading').hidden = true;
-    $('bone-count').textContent = `${bones.length} kostí`;
+    $('bone-count').textContent = `${bones.length} otázek`;
     for (const id of [...toolIds, 'restart']) $(id).disabled = false;
     render();
   } catch (error) {
+    if (current !== generation) return;
     console.error(error);
-    showError('Zkontroluj připojení a obnov stránku. Prohlížeč musí podporovat WebGL 2. Pokud chyba trvá, zkus aktuální Chrome, Edge nebo Firefox.');
+    viewer?.dispose(); viewer = null;
+    showError('Zkontroluj připojení. 3D model vyžaduje WebGL 2 a aktuální prohlížeč. Kvíz rovin a směrů funguje také bez WebGL.');
   }
 }
-start();
 window.addEventListener('pagehide', event => { if (!event.persisted) viewer?.dispose(); });

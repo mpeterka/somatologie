@@ -1,0 +1,172 @@
+[
+  {
+    "id": "trapezius",
+    "cs": "Trapézový sval",
+    "la": "Musculus trapezius",
+    "region": "Trup",
+    "meshIds": [
+      "Ascending part of trapezius muscle.l",
+      "Ascending part of trapezius muscle.r",
+      "Descending part of trapezius muscle.l",
+      "Descending part of trapezius muscle.r",
+      "Transverse part of trapezius muscle.l",
+      "Transverse part of trapezius muscle.r"
+    ]
+  },
+  {
+    "id": "deltoideus",
+    "cs": "Deltový sval",
+    "la": "Musculus deltoideus",
+    "region": "Horní končetina",
+    "meshIds": [
+      "Acromial part of deltoid muscle.l",
+      "Acromial part of deltoid muscle.r",
+      "Clavicular part of deltoid muscle.l",
+      "Clavicular part of deltoid muscle.r",
+      "Scapular spinal part of deltoid muscle.l",
+      "Scapular spinal part of deltoid muscle.r"
+    ]
+  },
+  {
+    "id": "biceps",
+    "cs": "Dvojhlavý sval pažní",
+    "la": "Musculus biceps brachii",
+    "region": "Horní končetina",
+    "meshIds": [
+      "Long head of biceps brachii.l",
+      "Long head of biceps brachii.r",
+      "Short head of biceps brachii.l",
+      "Short head of biceps brachii.r"
+    ]
+  },
+  {
+    "id": "triceps",
+    "cs": "Trojhlavý sval pažní",
+    "la": "Musculus triceps brachii",
+    "region": "Horní končetina",
+    "meshIds": [
+      "Lateral head of triceps brachii.l",
+      "Lateral head of triceps brachii.r",
+      "Long head of triceps brachii.l",
+      "Long head of triceps brachii.r",
+      "Medial head of triceps brachii.l",
+      "Medial head of triceps brachii.r"
+    ]
+  },
+  {
+    "id": "brachialis",
+    "cs": "Pažní sval",
+    "la": "Musculus brachialis",
+    "region": "Horní končetina",
+    "meshIds": [
+      "Brachialis muscle.l",
+      "Brachialis muscle.r"
+    ]
+  },
+  {
+    "id": "pectoralis",
+    "cs": "Velký prsní sval",
+    "la": "Musculus pectoralis major",
+    "region": "Trup",
+    "meshIds": [
+      "(Abdominal part of pectoralis major muscle).l",
+      "(Abdominal part of pectoralis major muscle).r",
+      "Clavicular head of pectoralis major muscle.l",
+      "Clavicular head of pectoralis major muscle.r",
+      "Sternocostal head of pectoralis major muscle.l",
+      "Sternocostal head of pectoralis major muscle.r"
+    ]
+  },
+  {
+    "id": "latissimus",
+    "cs": "Široký sval zádový",
+    "la": "Musculus latissimus dorsi",
+    "region": "Trup",
+    "meshIds": [
+      "Latissimus dorsi muscle.l",
+      "Latissimus dorsi muscle.r"
+    ]
+  },
+  {
+    "id": "rectus-abdominis",
+    "cs": "Přímý sval břišní",
+    "la": "Musculus rectus abdominis",
+    "region": "Trup",
+    "meshIds": [
+      "Rectus abdominis muscle.l",
+      "Rectus abdominis muscle.r"
+    ]
+  },
+  {
+    "id": "sternocleidomastoideus",
+    "cs": "Zdvihač hlavy",
+    "la": "Musculus sternocleidomastoideus",
+    "region": "Krk",
+    "meshIds": [
+      "Sternocleidomastoid muscle.l",
+      "Sternocleidomastoid muscle.r"
+    ]
+  },
+  {
+    "id": "gluteus",
+    "cs": "Velký hýžďový sval",
+    "la": "Musculus gluteus maximus",
+    "region": "Dolní končetina",
+    "meshIds": [
+      "Gluteus maximus muscle.l",
+      "Gluteus maximus muscle.r"
+    ]
+  },
+  {
+    "id": "sartorius",
+    "cs": "Krejčovský sval",
+    "la": "Musculus sartorius",
+    "region": "Dolní končetina",
+    "meshIds": [
+      "Sartorius muscle.l",
+      "Sartorius muscle.r"
+    ]
+  },
+  {
+    "id": "rectus-femoris",
+    "cs": "Přímý sval stehenní",
+    "la": "Musculus rectus femoris",
+    "region": "Dolní končetina",
+    "meshIds": [
+      "Rectus femoris muscle.l",
+      "Rectus femoris muscle.r"
+    ]
+  },
+  {
+    "id": "gastrocnemius",
+    "cs": "Dvojhlavý sval lýtkový",
+    "la": "Musculus gastrocnemius",
+    "region": "Dolní končetina",
+    "meshIds": [
+      "Lateral head of gastrocnemius.l",
+      "Lateral head of gastrocnemius.r",
+      "Medial head of gastrocnemius.l",
+      "Medial head of gastrocnemius.r"
+    ]
+  },
+  {
+    "id": "soleus",
+    "cs": "Šikmý sval lýtkový",
+    "la": "Musculus soleus",
+    "region": "Dolní končetina",
+    "meshIds": [
+      "Soleus muscle.l",
+      "Soleus muscle.r"
+    ]
+  },
+  {
+    "id": "tibialis",
+    "cs": "Přední sval holenní",
+    "la": "Musculus tibialis anterior",
+    "region": "Dolní končetina",
+    "meshIds": [
+      "Tibialis anterior muscle.l",
+      "Tibialis anterior muscle.r"
+    ]
+  }
+]

@@ -1,14 +1,15 @@
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
 const root = new URL('../dist/', import.meta.url);
-const bones = JSON.parse(readFileSync(new URL('bones.json', root)));
-const glb = readFileSync(new URL('models/skeletal.glb', root));
+for (const [dataset, modelFile, expected] of [['bones', 'skeletal', 100], ['muscles', 'muscular', 15]]) {
+const bones = JSON.parse(readFileSync(new URL(`${dataset}.json`, root)));
+const glb = readFileSync(new URL(`models/${modelFile}.glb`, root));
 assert.equal(glb.toString('ascii', 0, 4), 'glTF');
 assert.equal(glb.readUInt32LE(4), 2);
 assert.equal(glb.readUInt32LE(8), glb.length);
 const model = JSON.parse(glb.subarray(20, 20 + glb.readUInt32LE(12)));
-const modelIds = new Set(model.nodes.filter(n => n.mesh !== undefined).map(n => n.extras?.za_name));
-assert.equal(bones.length, 100);
+const modelIds = new Set(model.nodes.map(n => n.extras?.za_name).filter(Boolean));
+assert.equal(bones.length, expected);
 for (const field of ['id', 'cs', 'la']) {
   assert.ok(bones.every(b => typeof b[field] === 'string' && b[field].trim()));
   const count = new Set(bones.map(b => b[field])).size;
@@ -25,4 +26,10 @@ for (const bone of bones) {
   }
 }
 assert.ok(existsSync(new URL('models/License.txt', root)));
-console.log(`OK: ${bones.length} kostí, ${assigned.size} jednoznačných částí modelu.`);
+console.log(`OK: ${dataset}, ${bones.length} otázek, ${assigned.size} jednoznačných částí modelu.`);
+}
+const directions = JSON.parse(readFileSync(new URL('directions.json', root)));
+assert.equal(directions.length, 21);
+assert.equal(directions.filter(item => item.region === 'Roviny').length, 3);
+assert.equal(new Set(directions.map(item => item.id)).size, 21);
+console.log('OK: 3 roviny a 18 směrů.');

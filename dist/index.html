@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#132532">
-  <meta name="description" content="Procvičujte české a latinské názvy 100 kostí na skutečné 3D kostře.">
-  <title>Somatologie — poznej kost</title>
+  <meta name="description" content="Procvičujte české a latinské názvy kostí, svalů, rovin a směrů lidského těla.">
+  <title>Somatologie — procvičování anatomie</title>
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./style.css">
   <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script>
@@ -14,12 +14,23 @@
 <body>
   <header class="header">
     <a class="brand" href="./" aria-label="Somatologie — úvod"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M8 12a4 4 0 1 1 4-4l12 12a4 4 0 1 1-4 4Z" fill="none" stroke="currentColor" stroke-width="2.5"/></svg><span>Somatologie</span></a>
-    <span class="header-note">Poznej kost. Nauč se název.</span>
-    <button id="restart" class="text-button" disabled>Začít znovu</button>
+    <span class="header-note">Poznávej lidské tělo.</span>
+    <div class="header-actions"><button id="choose-quiz" class="text-button" hidden>Výběr kvízu</button><button id="restart" class="text-button" hidden disabled>Začít znovu</button></div>
   </header>
-  <main class="workspace">
+  <main id="quiz-menu" class="quiz-menu">
+    <p class="menu-eyebrow">Základy somatologie</p>
+    <h1>Co si dnes procvičíš?</h1>
+    <p class="menu-intro">Vyber téma. Poznávej zvýrazněné části a střídej české a latinské názvy.</p>
+    <div class="quiz-cards">
+      <button class="quiz-card" data-quiz="bones"><span class="card-number">01 / KOSTRA</span><svg viewBox="0 0 120 100" aria-hidden="true"><path d="M28 35a13 13 0 1 1 18-18l46 46a13 13 0 1 1-18 18Z"/></svg><strong>Kosti</strong><span>Skutečná 3D kostra. Základní názvy bez čísel a stran.</span><small>100 otázek · 33 názvů <b>→</b></small></button>
+      <button class="quiz-card" data-quiz="muscles"><span class="card-number">02 / SVALSTVO</span><svg viewBox="0 0 120 100" aria-hidden="true"><path d="M18 76c15-8 15-27 26-29 10-2 15 10 26 8 12-2 20-18 31-33M23 80c17 4 31-9 40-16 12-9 25-14 39-13M17 75l6 5M101 22l1 29M40 50l23 14M51 50l23 7"/></svg><strong>Svaly</strong><span>Poznej hlavní svaly na 3D modelu. Hlavy svalu se učíš společně.</span><small>15 základních svalů <b>→</b></small></button>
+      <button class="quiz-card" data-quiz="directions"><span class="card-number">03 / ORIENTACE</span><svg viewBox="0 0 120 100" aria-hidden="true"><path d="M60 12v76M22 50h76M51 23l9-11 9 11M87 41l11 9-11 9"/><path d="m29 73 32-12 30 12-32 12Z"/></svg><strong>Roviny a směry</strong><span>Roviny těla a základní směrové názvy na názorných obrázcích.</span><small>3 roviny · 18 směrů <b>→</b></small></button>
+    </div>
+    <p class="menu-note">Vždy čtyři možnosti · čeština a latina · průběžné skóre</p>
+  </main>
+  <main id="workspace" class="workspace" hidden>
     <section class="model-panel" aria-label="Anatomický model">
-      <div class="model-heading"><span>Anatomická kostra</span><span class="model-count" id="bone-count">100 kostí</span></div>
+      <div class="model-heading"><span id="model-title">Anatomická kostra</span><span class="model-count" id="bone-count">100 kostí</span></div>
       <div id="viewer" class="viewer"></div>
       <div id="loading" class="loading" role="status"><span class="loader" aria-hidden="true"></span><strong>Načítám 3D kostru</strong><span>Chvilku strpení, připravujeme první otázku.</span></div>
       <div class="model-tools" aria-label="Ovládání modelu">
@@ -28,7 +39,7 @@
         <button id="back-view" disabled title="Otočit pohled o 180 stupňů"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9a8 8 0 1 1 0 6M4 4v5h5"/></svg><span>Otočit</span></button>
         <button id="ghost" disabled aria-pressed="false" title="Ztlumit ostatní kosti"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg><span>Ztlumit okolí</span></button>
       </div>
-      <p class="model-help">Tažením otáčej · kolečkem přibližuj <span>Levá a pravá strana jsou z pohledu těla.</span></p>
+      <p id="model-help" class="model-help">Tažením otáčej · kolečkem přibližuj</p>
     </section>
     <section class="study-panel" aria-labelledby="question-title">
       <div class="progress-line"><span id="progress-label">Připravujeme procvičování</span><span id="language" class="language">Česky</span></div>
@@ -44,9 +55,9 @@
         <div class="score-heading"><h2>Tvoje průběžné skóre</h2><span id="score-description">Zatím bez odpovědi</span></div>
         <div class="score"><div><strong id="correct">0</strong><span>správně</span></div><div><strong id="total">0</strong><span>odpovědí</span></div><div><strong id="percent">0<span>%</span></strong><span>úspěšnost</span></div></div>
       </div>
-      <p class="study-note">Čeština a latina se střídají po každé otázce. Každou kost potkáš v jednom průchodu právě jednou.</p>
+      <p class="study-note">Čeština a latina se střídají po každé otázce. Každou otázku potkáš v jednom průchodu právě jednou. Nový kvíz začíná s nulovým skóre.</p>
     </section>
   </main>
-  <footer><span>100 vybraných kostí pro základní procvičování</span><a href="./attribution.html" target="_blank" rel="noopener">Model, názvosloví a licence</a></footer>
+  <footer><span>Základní anatomie · kosti, svaly, roviny a směry</span><a href="./attribution.html" target="_blank" rel="noopener">Modely, názvosloví a licence</a></footer>
 </body>
 </html>
