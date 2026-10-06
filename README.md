@@ -43,4 +43,6 @@ Podrobnosti, zdroje názvosloví a odkazy na licence v `dist/attribution.html`. 
 
 ## Publikování
 
-GitHub Actions po pushi na větev `somatologie` spustí testy a ověření dat a nasadí adresář `dist` na GitHub Pages. V nastavení Pages musí být zdroj GitHub Actions. Závislosti jsou již dodané v dist/vendor, nasazení nepoužívá externí CDN. Odkazy a URL assetů jsou relativní, aby web fungoval pod `/somatologie/`.
+GitHub Actions po pushi na větev `main` spustí testy a ověření dat a nasadí adresář `dist` na GitHub Pages. V nastavení Pages musí být zdroj GitHub Actions. Závislosti jsou již dodané v dist/vendor, nasazení nepoužívá externí CDN. Odkazy a URL assetů jsou relativní, aby web fungoval pod `/somatologie/`.
+
+Na iPadu používat Safari na iPadOS 16.4 nebo novějším (WebGL 2 a import maps). Otáčení tažením, zoom gestem dvou prstů, odpovědi klepnutím. Rozložení ověřeno na mobilním a tabletovém viewportu, nikoli na fyzickém iPadu.

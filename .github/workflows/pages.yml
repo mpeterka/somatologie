@@ -2,7 +2,7 @@ name: Deploy Somatologie to GitHub Pages
 
 on:
   push:
-    branches: [somatologie]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
